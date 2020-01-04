@@ -1,30 +1,30 @@
 package com.bridgelabz.felloship.source;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import com.bridgelabz.felloship.utility.Utility;
 
 public class test {
 
 	static Scanner sc = new Scanner(System.in);
 	static List<Person> book;
 	public static String spath;
-	
+
+	public test() {
+		book = check.readbook(spath);
+	}
+
 	public static void selectaction() throws IOException {
 
 		int choice;
 		do {
 			System.out.println("****File operations :*****");
 			System.out.println("1: New User\n" + "2: Update User\n" + "3: Delete User\n" + "4: Search User\n"
-					+ "5: Display sorted Book\n" + "6: Back\n"+"7:Exit\n");
+					+ "5: Display sorted Book\n" + "6: Back\n" + "7:Exit\n");
 
 			System.out.print("select choice :");
 			choice = sc.nextInt();
@@ -67,46 +67,31 @@ public class test {
 
 	public static void AddNewPerson() throws IOException {
 
-		Gson gson = new Gson();
-		book = new ArrayList<Person>();
-		BufferedReader br = new BufferedReader(new FileReader(spath));
-		Person[] person = gson.fromJson(br, Person[].class);
-		for (Person person2 : person) {
-			book.add(person2);
-			// getPerson(person2);
-			// System.out.println();
-		}
+		Person newperson = new Person();
 
 		System.out.print("enter user firstName: ");
-		String firstName = sc.next();
+		newperson.setFirstName(sc.next());
+
 		System.out.print("enter user lastName: ");
-		String lastName = sc.next();
+		newperson.setFirstName(sc.next());
+
 		System.out.print("enter user address: ");
 		sc.nextLine();
-		String address = sc.nextLine();
+		newperson.setFirstName(sc.next());
+
 		System.out.print("enter state , city , zip code : ");
-		String state = sc.next();
-		String city = sc.next();
-		String zipcode = sc.next();
+		newperson.setFirstName(sc.next());
+		newperson.setFirstName(sc.next());
+		newperson.setFirstName(sc.next());
+
 		System.out.print("enter the phone number: ");
-		String phone = sc.next();
+		newperson.setFirstName(sc.next());
 
-		Person newperson = new Person(firstName, lastName, address, state, city, zipcode, phone);
-		// isSave(newperson, spath);
 		book.add(newperson);
-		savebook(book);
-	}
+		System.out.println("Saved Contact Successfully....");
 
-	public static void savebook(List<Person> book2) throws IOException {
+		check.writebook(book, spath);
 
-		FileWriter writer = new FileWriter(
-				"/home/admin1/Desktop/JavaProject/AddressBook/src/utilityaddressbook/demo.json");
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-		// System.out.println(gson.toJson(book));
-		writer.write(gson.toJson(book2));
-
-		writer.close();
 	}
 
 	public static void getPersonDetails(Person person22) {
@@ -115,24 +100,19 @@ public class test {
 				+ person22.City + "\n Zip-code  : " + person22.zipcode + "\n Contact   : " + person22.phone);
 	}
 
-	public static void updatefile() throws IOException {
-		Gson gson = new Gson();
+	public static void updatefile() {
 		System.out.println("enter first name for search");
 		String inputstring = sc.next();
-		BufferedReader br = new BufferedReader(new FileReader(spath));
 
 		boolean find = false;
 
-		Person[] person2 = gson.fromJson(br, Person[].class);
-
-		for (Person person22 : person2) {
-			if (person22.FirstName.equals(inputstring)) {
+		for (Person existingPerson : book) {
+			if (existingPerson.FirstName.equals(inputstring)) {
 				find = true;
-				System.out.print("New Address : ");
-				String newaddress = sc.next();
-				person22.Address = newaddress;
-
-				getPersonDetails(person22);
+				getPersonDetails(existingPerson);
+				System.out.println();
+				Selecteditmenu(existingPerson);
+				break;
 			}
 		}
 
@@ -140,22 +120,75 @@ public class test {
 			System.out.println("contact not found!...");
 		}
 
-		// close reader
-		br.close();
+		System.out.println("1: Save\n2: Save As\n");
+		int ch = sc.nextInt();
+		switch (ch) {
+		case 1:
+			check.writebook(book, spath);
+			System.out.println("Save changes..");
+			break;
+		case 2:
+			Utility.saveAs(book);
+
+			break;
+		default:
+			System.out.println("invalid choice");
+			break;
+		}
 	}
 
-	public static void SortbyName() throws FileNotFoundException {
-		Gson gson = new Gson();
-		ArrayList<String> al = new ArrayList<String>();
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(spath));
-		Person[] person = gson.fromJson(bufferedReader, Person[].class);
-		for (Person person2 : person) {
-			al.add(person2.FirstName);
+	private static void Selecteditmenu(Person existingPerson) {
+		System.out.println(
+				"1: Lastname\n" + "2: Address \n" + "3: State\n" + "4: City\n" + "5: Zipcode\n" + "6: Contact\n");
+		int choice = sc.nextInt();
+
+		switch (choice) {
+		case 1:
+			System.out.println("new lastname");
+			existingPerson.setLastName(sc.next());
+
+			break;
+		case 2:
+			System.out.print("New Address : ");
+			existingPerson.setAddress(sc.next());
+
+			break;
+		case 3:
+			System.out.println("new state");
+			existingPerson.setState(sc.next());
+			break;
+		case 4:
+			System.out.println("new city");
+			existingPerson.setCity(sc.next());
+			break;
+		case 5:
+			System.out.println("new zipcode");
+			existingPerson.setZipcode(sc.next());
+			break;
+		case 6:
+			System.out.println("new phone");
+			existingPerson.setPhone(sc.next());
+			break;
+
+		default:
+			break;
 		}
-		Collections.sort(al);
-		for (int i = 0; i < al.size(); i++) {
-			for (Person person2 : person) {
-				if (al.get(i).equals(person2.FirstName)) {
+
+	}
+
+	public static void SortbyName() {
+
+		List<Person> displaylist = book;
+
+		ArrayList<String> sort = new ArrayList<String>();
+
+		for (Person person2 : displaylist) {
+			sort.add(person2.FirstName);
+		}
+		Collections.sort(sort);
+		for (int i = 0; i < displaylist.size(); i++) {
+			for (Person person2 : displaylist) {
+				if (sort.get(i).equals(person2.FirstName)) {
 					System.out.println();
 					System.out.println("*********************" + (i + 1) + "************************");
 					System.out.println();
@@ -166,38 +199,30 @@ public class test {
 		}
 	}
 
-	public static void displaybook() throws FileNotFoundException {
+	public static void displaybook() {
 		System.out.println("***********Book**************");
-		Gson gson = new Gson();
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(spath));
-		Person[] person = gson.fromJson(bufferedReader, Person[].class);
-		for (Person person2 : person) {
-			getPersonDetails(person2);
+
+		for (Person person2 : book) {
+			System.out.println(person2.FirstName);
 		}
 
 	}
 
-	public static void deletePerson() throws IOException {
-		Gson gson = new Gson();
-		List<Person> al = new ArrayList<Person>();
+	public static void deletePerson() {
+
 		System.out.println("enput person fname");
 		String fname = sc.next();
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(spath));
-		Person[] persons = gson.fromJson(bufferedReader, Person[].class);
-		for (Person person : persons) {
-			Gson gsonsub = new Gson();
-			if (fname.equals(person.FirstName)) {
-				continue;
-			}
-			al.add(person);
 
-			// getPerson(person);
-			System.out.println(gsonsub.toJson(person));
+		for (Person person : book) {
+			if (fname.equals(person.FirstName)) {
+				book.remove(person);
+			}
+
 		}
-		savebook(al);
+		check.writebook(book, spath);
 	}
 
-	public static void read() throws IOException {
+	public static void read() {
 
 		System.out.println("Reading JSON from a file");
 		System.out.println("----------------------------");
@@ -205,15 +230,9 @@ public class test {
 		System.out.println("enter first name for search");
 		String inputstring = sc.next();
 
-		Gson gson = new Gson();
-
-		BufferedReader br = new BufferedReader(new FileReader(spath));
-
 		boolean find = false;
 
-		Person[] person2 = gson.fromJson(br, Person[].class);
-
-		for (Person person22 : person2) {
+		for (Person person22 : book) {
 			if (person22.FirstName.equals(inputstring)) {
 				find = true;
 
@@ -224,9 +243,6 @@ public class test {
 		if (!find) {
 			System.out.println("contact not found!...");
 		}
-
-		// close reader
-		br.close();
 
 	}
 

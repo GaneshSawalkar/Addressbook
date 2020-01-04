@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-@SuppressWarnings({ "unused" })
 public class Person {
 
 	String FirstName;
@@ -16,6 +15,76 @@ public class Person {
 	String phone;
 
 
+	public String getFirstName() {
+		return FirstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return LastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+
+	public String getAddress() {
+		return Address;
+	}
+
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+
+	public String getState() {
+		return State;
+	}
+
+
+	public void setState(String state) {
+		State = state;
+	}
+
+
+	public String getCity() {
+		return City;
+	}
+
+
+	public void setCity(String city) {
+		City = city;
+	}
+
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+/*
 	public Person(String firstName, String lastName, String address, String state, String city, String zipcode,
 			String phone) {
 		super();
@@ -27,5 +96,5 @@ public class Person {
 		this.zipcode = zipcode;
 		this.phone = phone;
 	}
-
+*/
 }

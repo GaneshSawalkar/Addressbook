@@ -5,16 +5,15 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-
 import com.bridgelabz.felloship.source.AddressBook;
 import com.bridgelabz.felloship.source.Person;
+import com.bridgelabz.felloship.source.check;
 import com.bridgelabz.felloship.source.test;
 
 public class Utility {
 	static Scanner scanner = new Scanner(System.in);
 	static String spath = "/home/admin1/Desktop/JavaProject/com.bridgelbz.felloship.addressbook/src/com/bridgelabz/felloship/utility/";
 	static File file;
-	static List<Person> book;
 
 	public static void createfile() {
 		System.out.print("\nEnter new json file :");
@@ -77,7 +76,7 @@ public class Utility {
 
 			System.out.println("which file you wnt to open?");
 			String openfile = scanner.next();
-			spath = "/home/admin1/Desktop/JavaProject/AddressBook/src/utilityaddressbook/" + openfile + ".json";
+			String mypath = spath + openfile + ".json";
 			System.out.print("opening");
 			for (int i = 1; i <= 5; i++) {
 				// Thread.sleep(1000);
@@ -86,38 +85,11 @@ public class Utility {
 			System.out.println();
 
 			System.out.println(openfile + ".json file is opened");
-			test.spath = spath;
+			test.spath = mypath;
 			test.selectaction();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}
-
-	public static void saveBook() throws IOException {
-
-	}
-	
-	public static void saveas() throws IOException {
-		try {
-			spath = "/home/admin1/Desktop/JavaProject/AddressBook/src/utilityaddressbook";
-			System.out.println("enter new json file name");
-			String newfile = scanner.next();
-			spath = "/home/admin1/Desktop/JavaProject/AddressBook/src/utilityaddressbook/" + newfile + ".json";
-
-			file = new File(spath);
-			if (!file.exists()) {
-				file.createNewFile();
-				System.out.println("created sucessfully");
-				System.out.println("Create & save successfully....");
-			} else {
-				System.out.println("already created with that name.\n plz change name.");
-				// test.savebook(spath, book);
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	public static void back() throws IOException {
@@ -126,6 +98,30 @@ public class Utility {
 
 	public static void readwritebook(String spath) throws IOException {
 		test.selectaction();
+	}
+
+	public static void saveAs(List<Person> book) {
+		try {
+
+			System.out.println("enter new json file name");
+			String newfile = scanner.next();
+			String savepath = spath + newfile + ".json";
+
+			file = new File(savepath);
+			if (!file.exists()) {
+				file.createNewFile();
+				System.out.println("created sucessfully");
+
+			} else {
+				System.out.println("already created with that name.\n plz change name.");
+			}
+			check.writebook(book, savepath);
+			System.out.println("Create & save successfully....");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
