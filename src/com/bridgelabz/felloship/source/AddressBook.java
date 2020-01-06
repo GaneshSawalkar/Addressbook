@@ -32,7 +32,7 @@ public class AddressBook {
 			break;
 
 		case 3:
-			test.displaybook();
+			Operations.displaybook();
 
 		case 4:
 			System.out.println();

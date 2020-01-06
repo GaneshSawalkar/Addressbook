@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 import com.bridgelabz.felloship.source.AddressBook;
 import com.bridgelabz.felloship.source.Person;
-import com.bridgelabz.felloship.source.check;
-import com.bridgelabz.felloship.source.test;
+import com.bridgelabz.felloship.source.Control;
+import com.bridgelabz.felloship.source.Operations;
 
 public class Utility {
 	static Scanner scanner = new Scanner(System.in);
@@ -85,8 +85,8 @@ public class Utility {
 			System.out.println();
 
 			System.out.println(openfile + ".json file is opened");
-			test.spath = mypath;
-			test.selectaction();
+			Operations.spath = mypath;
+			Operations.selectaction();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -97,7 +97,7 @@ public class Utility {
 	}
 
 	public static void readwritebook(String spath) throws IOException {
-		test.selectaction();
+		Operations.selectaction();
 	}
 
 	public static void saveAs(List<Person> book) {
@@ -115,7 +115,7 @@ public class Utility {
 			} else {
 				System.out.println("already created with that name.\n plz change name.");
 			}
-			check.writebook(book, savepath);
+			Control.writebook(book, savepath);
 			System.out.println("Create & save successfully....");
 
 		} catch (Exception e) {

@@ -1,9 +1,5 @@
 package com.bridgelabz.felloship.source;
 
-import java.util.List;
-
-import com.google.gson.Gson;
-
 public class Person {
 
 	String FirstName;

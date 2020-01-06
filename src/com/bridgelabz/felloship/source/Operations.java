@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 import com.bridgelabz.felloship.utility.Utility;
 
-public class test {
+public class Operations {
 
 	static Scanner sc = new Scanner(System.in);
 	static List<Person> book;
 	public static String spath;
 
-	public test() {
-		book = check.readbook(spath);
+	public Operations() {
+		book = Control.readbook(spath);
 	}
 
 	public static void selectaction() throws IOException {
@@ -90,7 +90,7 @@ public class test {
 		book.add(newperson);
 		System.out.println("Saved Contact Successfully....");
 
-		check.writebook(book, spath);
+		Control.writebook(book, spath);
 
 	}
 
@@ -124,7 +124,7 @@ public class test {
 		int ch = sc.nextInt();
 		switch (ch) {
 		case 1:
-			check.writebook(book, spath);
+			Control.writebook(book, spath);
 			System.out.println("Save changes..");
 			break;
 		case 2:
@@ -219,7 +219,7 @@ public class test {
 			}
 
 		}
-		check.writebook(book, spath);
+		Control.writebook(book, spath);
 	}
 
 	public static void read() {
