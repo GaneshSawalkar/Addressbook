@@ -6,19 +6,24 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import com.bridgelabz.felloship.source.AddressBook;
-import com.bridgelabz.felloship.source.Person;
-import com.bridgelabz.felloship.source.Control;
-import com.bridgelabz.felloship.source.Operations;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.bridgelabz.felloship.model.Person;
+import com.bridgelabz.felloship.control.Control;
+import com.bridgelabz.felloship.main.AddressBook;
+import com.bridgelabz.felloship.main.Operations;
 
 public class Utility {
 
-	static Scanner scanner = new Scanner(System.in);
+	public static Scanner scanner = new Scanner(System.in);
 	// default file path
-	public static String spath = "/home/admin1/Desktop/addressbook/src/com/bridgelabz/felloship/utility/";
+	public static String spath = "/home/admin1/Desktop/Addressbook/src/com/bridgelabz/felloship/files/";
 	static File file;
+	static String phonenumber, zip;
 
 	// create new json file.
 	public static void createfile() {
@@ -33,14 +38,16 @@ public class Utility {
 				System.out.println(newfile + ".json" + " Created Sucessfully");
 				System.out.println("\n1 read/write book\n" + "2 back\n");
 				System.out.print("enter choice : ");
-				int ch = scanner.nextInt();
+				int ch = Utility.isvalidInteger();
 				switch (ch) {
 				case 1:
+
 					// Initialized file and add " [ ] " in file
 					FileWriter writer = new FileWriter(mypath);
 					PrintWriter printWriter = new PrintWriter(writer);
 					printWriter.printf("[ ]");
 					printWriter.close();
+
 					// set file path
 					Operations.spath = mypath;
 					Operations.selectaction(); // open operation menu
@@ -88,7 +95,8 @@ public class Utility {
 		}
 		String mypath = "";
 		System.out.println("which file you wnt to open?");
-		int userdefine = scanner.nextInt();
+		System.out.println("enter the number: ");
+		int userdefine = Utility.isvalidInteger();
 		mypath = spath + allfiles.get(userdefine - 1); // file path with user choice file
 		System.out.println();
 		try {
@@ -131,4 +139,73 @@ public class Utility {
 		}
 	}
 
+	public static int isvalidInteger() {
+		int i = 0;
+		boolean ok = true;
+		while (ok) {
+			try {
+
+				i = scanner.nextInt();
+				ok = false;
+			} catch (InputMismatchException e) {
+				System.out.println("Not integer value.");
+				System.out.print("select again: ");
+				scanner.next();
+			}
+		}
+
+		return i;
+	}
+
+	public static String isStringInt(String integer) {
+		try {
+			int check = Integer.parseInt(integer);
+		} catch (NumberFormatException e) {
+			System.out.println("invalid format enter again:");
+			integer = isStringInt(scanner.next());
+		}
+		return integer;
+	}
+
+	public static String isString() {
+		String input;
+		boolean flag = false;
+		do {
+			input = scanner.next();
+			if (input.matches("^[a-zA-Z]*$")) {
+				flag = true;
+			} else {
+				System.out.print("Wrong input..! type again :");
+			}
+		} while (!flag);
+		return input;
+	}
+
+	public static String isvalidphone() {
+		phonenumber = scanner.next();
+		Pattern pattern = Pattern.compile("[7-9][0-9]{9}");
+		Matcher matcher = pattern.matcher(phonenumber);
+		if (matcher.find()) {
+			return phonenumber;
+		} else {
+			System.out.println("number must be 10 digit & start with 7-9");
+			isvalidphone();
+		}
+		return phonenumber;
+
+	}
+
+	public static String isvalidzip() {
+		zip = isStringInt(scanner.next());
+		Pattern pattern = Pattern.compile("^[0-9]{6}$");
+		Matcher matcher = pattern.matcher(zip);
+		if (matcher.find()) {
+			return zip;
+		} else {
+			System.out.println("zip code must be 6 digit");
+			isvalidzip();
+		}
+		return zip;
+
+	}
 }
