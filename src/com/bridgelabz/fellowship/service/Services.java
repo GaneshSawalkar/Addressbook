@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.service;
+package com.bridgelabz.fellowship.service;
 
 public interface Services {
 	void UpdatePersonInfo();

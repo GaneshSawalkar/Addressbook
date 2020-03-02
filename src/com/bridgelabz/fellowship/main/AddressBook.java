@@ -1,11 +1,9 @@
-package com.bridgelabz.felloship.main;
+package com.bridgelabz.fellowship.main;
 
 import java.io.IOException;
 
-import com.bridgelabz.felloship.service.FileService;
-import com.bridgelabz.felloship.serviceimplement.Instance;
-import com.bridgelabz.felloship.serviceimplement.ServicesImplements;
-import com.bridgelabz.felloship.serviceimplement.Utility;
+import com.bridgelabz.fellowship.service.*;
+import com.bridgelabz.fellowship.serviceimplement.*;
 
 public class AddressBook {
 
@@ -33,7 +31,6 @@ public class AddressBook {
 			// read any file
 			file.OpenFile();
 			file.readbook();
-
 			System.out.println("**********************");
 			action();
 			break;

@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.model;
+package com.bridgelabz.fellowship.model;
 
 public class Person {
 

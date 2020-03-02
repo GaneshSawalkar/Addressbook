@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.serviceimplement;
+package com.bridgelabz.fellowship.serviceimplement;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.bridgelabz.felloship.control.Control;
-import com.bridgelabz.felloship.main.AddressBook;
-import com.bridgelabz.felloship.model.Person;
-import com.bridgelabz.felloship.service.FileService;
+import com.bridgelabz.fellowship.control.Control;
+import com.bridgelabz.fellowship.main.AddressBook;
+import com.bridgelabz.fellowship.model.Person;
+import com.bridgelabz.fellowship.service.FileService;
 
 public class FileServiceImplents implements FileService {
 
@@ -98,7 +98,7 @@ public class FileServiceImplents implements FileService {
 		System.out.println();
 		try {
 			ServicesImplements.spath = mypath;
-			List<Person> book = Control.readbook(mypath);
+			List<Person> book = Control.readBook(mypath);
 		} catch (Exception e) {
 			System.out.println("file not found!");
 			OpenFile(); // file not found then again try to open
@@ -124,7 +124,7 @@ public class FileServiceImplents implements FileService {
 				System.out.println("already created with that name.\n plz change name.");
 			}
 			// save changes in new file( savepath => new file name)
-			Control.writebook(book, savepath);
+			Control.writeBook(book, savepath);
 			System.out.println("Create & save successfully....");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,8 +141,10 @@ public class FileServiceImplents implements FileService {
 		}
 	}
 
+	@Override
 	public void readbook() {
-
+		ServicesImplements services = new ServicesImplements();
+		services.SortbyName();
 	}
 
 }

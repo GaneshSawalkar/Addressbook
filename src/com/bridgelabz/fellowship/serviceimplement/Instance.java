@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.serviceimplement;
+package com.bridgelabz.fellowship.serviceimplement;
 
 public class Instance {
 	private static ServicesImplements service;

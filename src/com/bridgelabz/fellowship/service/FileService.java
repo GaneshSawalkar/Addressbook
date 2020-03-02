@@ -1,8 +1,8 @@
-package com.bridgelabz.felloship.service;
+package com.bridgelabz.fellowship.service;
 
 import java.util.List;
 
-import com.bridgelabz.felloship.model.Person;
+import com.bridgelabz.fellowship.model.Person;
 
 public interface FileService {
 	void CreateFile();
@@ -14,4 +14,5 @@ public interface FileService {
 	void SaveAs(List<Person> l);
 
 	void readbook();
+
 }

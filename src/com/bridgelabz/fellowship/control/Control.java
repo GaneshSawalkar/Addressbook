@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.control;
+package com.bridgelabz.fellowship.control;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bridgelabz.felloship.model.*;
+import com.bridgelabz.fellowship.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -15,7 +15,7 @@ public class Control {
 	static String filepath;
 	public static Gson gson;
 
-	public static ArrayList<Person> readbook(String filepath) {
+	public static ArrayList<Person> readBook(String filepath) {
 		ArrayList<Person> list = new ArrayList<Person>();
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath));
@@ -28,7 +28,7 @@ public class Control {
 		return list;
 	}
 
-	public static void writebook(List<Person> book, String filepath) {
+	public static void writeBook(List<Person> book, String filepath) {
 		try {
 			FileWriter writer = new FileWriter(filepath);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();

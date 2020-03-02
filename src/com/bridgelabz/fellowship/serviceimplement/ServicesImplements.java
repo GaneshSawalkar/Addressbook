@@ -1,15 +1,15 @@
-package com.bridgelabz.felloship.serviceimplement;
+package com.bridgelabz.fellowship.serviceimplement;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.bridgelabz.felloship.control.Control;
-import com.bridgelabz.felloship.main.AddressBook;
-import com.bridgelabz.felloship.model.*;
-import com.bridgelabz.felloship.service.FileService;
-import com.bridgelabz.felloship.service.Services;
+import com.bridgelabz.fellowship.control.Control;
+import com.bridgelabz.fellowship.main.AddressBook;
+import com.bridgelabz.fellowship.model.*;
+import com.bridgelabz.fellowship.service.FileService;
+import com.bridgelabz.fellowship.service.Services;
 
 public class ServicesImplements implements Services {
 	static List<Person> book;
@@ -18,7 +18,7 @@ public class ServicesImplements implements Services {
 	public static void selectaction() throws IOException {
 		int choice;
 		do {
-			book = Control.readbook(spath);
+			book = Control.readBook(spath);
 			System.out.println("****File operations :*****");
 			System.out.println("1: New User\n" + "2: Update User\n" + "3: Delete User\n" + "4: Search User\n"
 					+ "5: Display sorted Book by name\n" + "6: Display sorted Book by zip\n" + "7: Back\n"
@@ -77,7 +77,7 @@ public class ServicesImplements implements Services {
 		newperson.setPhone(Utility.isvalidphone());
 		book.add(newperson);
 		System.out.println("Saved Contact Successfully....");
-		Control.writebook(book, spath);
+		Control.writeBook(book, spath);
 	}
 
 	// update person information
@@ -101,7 +101,7 @@ public class ServicesImplements implements Services {
 		int ch = Utility.isvalidInteger();
 		switch (ch) {
 		case 1:
-			Control.writebook(book, spath); // save in open file
+			Control.writeBook(book, spath); // save in open file
 			System.out.println("Save changes..");
 			break;
 		case 2:
@@ -151,7 +151,7 @@ public class ServicesImplements implements Services {
 
 	// display all names in sorted form
 	public void SortbyName() {
-		book = Control.readbook(spath);
+		book = Control.readBook(spath);
 		List<Person> displaylist = book;
 		ArrayList<String> sort = new ArrayList<String>();
 		for (Person person2 : displaylist) {
@@ -173,7 +173,7 @@ public class ServicesImplements implements Services {
 
 	// display sorted contacts by zip-codes
 	public void SortbyZip() {
-		book = Control.readbook(spath);
+		book = Control.readBook(spath);
 		List<Person> displaylist = book;
 		ArrayList<String> sort = new ArrayList<String>();
 		for (Person person2 : displaylist) {
@@ -210,7 +210,7 @@ public class ServicesImplements implements Services {
 				book.remove(person); // remove record
 			}
 		}
-		Control.writebook(book, spath);
+		Control.writeBook(book, spath);
 	}
 
 	// search person details

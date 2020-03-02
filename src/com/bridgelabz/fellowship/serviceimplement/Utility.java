@@ -1,4 +1,4 @@
-package com.bridgelabz.felloship.serviceimplement;
+package com.bridgelabz.fellowship.serviceimplement;
 
 import java.io.File;
 import java.util.InputMismatchException;
