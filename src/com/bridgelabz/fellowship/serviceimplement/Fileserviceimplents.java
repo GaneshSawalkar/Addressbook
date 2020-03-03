@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.bridgelabz.fellowship.control.Control;
-import com.bridgelabz.fellowship.main.AddressBook;
+import com.bridgelabz.fellowship.main.Addressbook;
 import com.bridgelabz.fellowship.model.Person;
-import com.bridgelabz.fellowship.service.FileService;
+import com.bridgelabz.fellowship.service.Fileservice;
 
-public class FileServiceImplents implements FileService {
+public class Fileserviceimplents implements Fileservice {
 
 	public static Scanner scanner = new Scanner(System.in);
 	// default file path
-	public static String FilePath = "/home/admin1/Documents/OOPSPrograms/addressbook/src/com/bridgelabz/felloship/files/";
+	public static String FilePath = "src/com/bridgelabz/fellowship/files/";
 	static File file;
 	static String phonenumber, zip;
 
 	// create new json file.
-	public void CreateFile() {
+	public void createFile() {
 		System.out.print("\nEnter new json file :");
 		String newfile = scanner.next();
 		String mypath = FilePath;
@@ -35,10 +35,9 @@ public class FileServiceImplents implements FileService {
 				System.out.println(newfile + ".json" + " Created Sucessfully");
 				System.out.println("\n1 read/write book\n" + "2 back\n");
 				System.out.print("enter choice : ");
-				int ch = Utility.isvalidInteger();
+				int ch = Utility.isValidInteger();
 				switch (ch) {
 				case 1:
-
 					// Initialized file and add " [ ] " in file
 					FileWriter writer = new FileWriter(mypath);
 					PrintWriter printWriter = new PrintWriter(writer);
@@ -46,18 +45,18 @@ public class FileServiceImplents implements FileService {
 					printWriter.close();
 
 					// set file path
-					ServicesImplements.spath = mypath;
-					ServicesImplements.selectaction(); // open operation menu
+					Servicesimplements.spath = mypath;
+					Servicesimplements.selectaction(); // open operation menu
 					break;
 				case 2:
-					Back(); // get back into file menu
+					back(); // get back into file menu
 					break;
 				default:
 					break;
 				}
 			} else {
 				System.out.println("\nFile already exist with that name. Change name please.");
-				CreateFile();
+				createFile();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +68,7 @@ public class FileServiceImplents implements FileService {
 	 */
 	@SuppressWarnings({ "unused", "unchecked" })
 	// open existing file using filename
-	public void OpenFile() {
+	public void openFile() {
 		file = new File(FilePath);
 		// String[] str = file.list();
 		File[] files = file.listFiles(new FilenameFilter() {
@@ -93,15 +92,15 @@ public class FileServiceImplents implements FileService {
 		String mypath = "";
 		System.out.println("which file you wnt to open?");
 		System.out.println("enter the File number: ");
-		int userdefine = Utility.isvalidInteger();
+		int userdefine = Utility.isValidInteger();
 		mypath = FilePath + allfiles.get(userdefine - 1); // file path with user choice file
 		System.out.println();
 		try {
-			ServicesImplements.spath = mypath;
+			Servicesimplements.spath = mypath;
 			List<Person> book = Control.readBook(mypath);
 		} catch (Exception e) {
 			System.out.println("file not found!");
-			OpenFile(); // file not found then again try to open
+			openFile(); // file not found then again try to open
 		}
 		System.out.println(allfiles.get(userdefine - 1) + ".json file is opened");
 	}
@@ -110,7 +109,7 @@ public class FileServiceImplents implements FileService {
 	 * @param book updated book received
 	 */
 	// updated file changes save in different files
-	public void SaveAs(List<Person> book) {
+	public void saveAs(List<Person> book) {
 		try {
 			System.out.println("enter new json file name");
 			String newfile = scanner.next();
@@ -133,18 +132,18 @@ public class FileServiceImplents implements FileService {
 
 	@Override
 	// get back from main menu
-	public void Back() {
+	public void back() {
 		try {
-			AddressBook.action();
+			Addressbook.action();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void readbook() {
-		ServicesImplements services = new ServicesImplements();
-		services.SortbyName();
+	public void readBook() {
+		Servicesimplements services = new Servicesimplements();
+		services.sortbyName();
 	}
 
 }

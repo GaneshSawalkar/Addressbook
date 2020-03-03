@@ -1,17 +1,17 @@
 package com.bridgelabz.fellowship.service;
 
 public interface Services {
-	void UpdatePersonInfo();
+	void updatePersonInfo();
 
-	void AddPerson();
+	void addPerson();
 
-	void DeletePerson();
+	void deletePerson();
 
-	void SearchPerson();
+	void searchPerson();
 
-	void DisplayPerson();
+	void displayPerson();
 
-	void SortbyZip();
+	void sortbyZip();
 
-	void SortbyName();
+	void sortbyName();
 }

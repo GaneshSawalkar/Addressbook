@@ -1,0 +1,29 @@
+[
+  {
+    "FirstName": "anesh",
+    "LastName": "xcfvcxfv",
+    "Address": "s road",
+    "State": "mh",
+    "City": "pune",
+    "zipcode": "789544",
+    "phone": "8996759645"
+  },
+  {
+    "FirstName": "amit",
+    "LastName": "asdas",
+    "Address": "r road",
+    "State": "mh",
+    "City": "mum",
+    "zipcode": "845865",
+    "phone": "7896986482"
+  },
+  {
+    "FirstName": "ganesh",
+    "LastName": "sadas",
+    "Address": "r s road",
+    "State": "mh",
+    "City": "nashik",
+    "zipcode": "154635",
+    "phone": "8154151500"
+  }
+]

@@ -1,22 +1,22 @@
 package com.bridgelabz.fellowship.serviceimplement;
 
 public class Instance {
-	private static ServicesImplements service;
-	private static FileServiceImplents file;
+	private static Servicesimplements service;
+	private static Fileserviceimplents file;
 
 	public Instance() {
 	}
 
-	public static ServicesImplements getServiceInstance() {
+	public static Servicesimplements getServiceInstance() {
 		if (service == null) {
-			service = new ServicesImplements();
+			service = new Servicesimplements();
 		}
 		return service;
 	}
 
-	public static FileServiceImplents getFileInstance() {
+	public static Fileserviceimplents getFileInstance() {
 		if (file == null) {
-			file = new FileServiceImplents();
+			file = new Fileserviceimplents();
 		}
 		return file;
 	}

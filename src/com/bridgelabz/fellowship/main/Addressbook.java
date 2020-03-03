@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.bridgelabz.fellowship.service.*;
 import com.bridgelabz.fellowship.serviceimplement.*;
 
-public class AddressBook {
+public class Addressbook {
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("*****************MyAddressBook***************");
@@ -17,20 +17,20 @@ public class AddressBook {
 		System.out.println("Menu :1 -> Create New Book\n" + "      2 -> Edit existing book \n"
 				+ "      3 -> Read Book \n" + "      4 -> Quit");
 		System.out.print("\nYour Choice is -> ");
-		FileService file = Instance.getFileInstance();
-		int choice = Utility.isvalidInteger();
+		Fileservice file = Instance.getFileInstance();
+		int choice = Utility.isValidInteger();
 		switch (choice) {
 		case 1:
-			file.CreateFile();
+			file.createFile();
 			break;
 		case 2:
-			file.OpenFile();
-			ServicesImplements.selectaction();
+			file.openFile();
+			Servicesimplements.selectaction();
 			break;
 		case 3:
 			// read any file
-			file.OpenFile();
-			file.readbook();
+			file.openFile();
+			file.readBook();
 			System.out.println("**********************");
 			action();
 			break;

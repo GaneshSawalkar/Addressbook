@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.List;
 
 import com.bridgelabz.fellowship.control.Control;
-import com.bridgelabz.fellowship.main.AddressBook;
-import com.bridgelabz.fellowship.model.*;
-import com.bridgelabz.fellowship.service.FileService;
+import com.bridgelabz.fellowship.main.Addressbook;
+import com.bridgelabz.fellowship.model.Person;
+import com.bridgelabz.fellowship.service.Fileservice;
 import com.bridgelabz.fellowship.service.Services;
 
-public class ServicesImplements implements Services {
+public class Servicesimplements implements Services {
 	static List<Person> book;
 	public static String spath;
 
@@ -24,29 +24,29 @@ public class ServicesImplements implements Services {
 					+ "5: Display sorted Book by name\n" + "6: Display sorted Book by zip\n" + "7: Back\n"
 					+ "8: Exit\n");
 			System.out.print("select choice :");
-			choice = Utility.isvalidInteger();
+			choice = Utility.isValidInteger();
 			Services e = Instance.getServiceInstance();
 			switch (choice) {
 			case 1:
-				e.AddPerson(); // add new person entry
+				e.addPerson(); // add new person entry
 				break;
 			case 2:
-				e.UpdatePersonInfo(); // update person info
+				e.updatePersonInfo(); // update person info
 				break;
 			case 3:
-				e.DeletePerson(); // delete person info
+				e.deletePerson(); // delete person info
 				break;
 			case 4:
-				e.SearchPerson(); // show person info
+				e.searchPerson(); // show person info
 				break;
 			case 5:
-				e.SortbyName(); // display list ascending order
+				e.sortbyName(); // display list ascending order
 				break;
 			case 6:
-				e.SortbyZip(); // display list ascending order
+				e.sortbyZip(); // display list ascending order
 				break;
 			case 7: // get user info
-				AddressBook.action();
+				Addressbook.action();
 				return;
 			case 8:
 				return;
@@ -57,7 +57,7 @@ public class ServicesImplements implements Services {
 		} while (choice != 8);
 	}
 
-	public void AddPerson() {
+	public void addPerson() {
 		Person newperson = new Person();
 		// System.out.println(Operations.spath);
 		System.out.print("enter user firstName: ");
@@ -72,16 +72,16 @@ public class ServicesImplements implements Services {
 		System.out.print("enter city : ");
 		newperson.setState(Utility.isString());
 		System.out.print("enter zip code : ");
-		newperson.setZipcode(Utility.isvalidzip());
+		newperson.setZipcode(Utility.isValidzip());
 		System.out.print("enter the phone number: ");
-		newperson.setPhone(Utility.isvalidphone());
+		newperson.setPhone(Utility.isValidphone());
 		book.add(newperson);
 		System.out.println("Saved Contact Successfully....");
 		Control.writeBook(book, spath);
 	}
 
 	// update person information
-	public void UpdatePersonInfo() {
+	public void updatePersonInfo() {
 		System.out.println("enter first name for search");
 		String inputstring = Utility.isString();
 		boolean find = false;
@@ -90,7 +90,7 @@ public class ServicesImplements implements Services {
 				find = true;
 				System.out.println(existingPerson.toString());
 				System.out.println();
-				Selecteditmenu(existingPerson);
+				selectEditMenu(existingPerson);
 				break;
 			}
 		}
@@ -98,15 +98,15 @@ public class ServicesImplements implements Services {
 			System.out.println("contact not found!...");
 		}
 		System.out.println("1: Save\n2: Save As\n");
-		int ch = Utility.isvalidInteger();
+		int ch = Utility.isValidInteger();
 		switch (ch) {
 		case 1:
 			Control.writeBook(book, spath); // save in open file
 			System.out.println("Save changes..");
 			break;
 		case 2:
-			FileService file = Instance.getFileInstance();
-			file.SaveAs(book); // save in new file
+			Fileservice file = Instance.getFileInstance();
+			file.saveAs(book); // save in new file
 			break;
 		default:
 			System.out.println("invalid choice");
@@ -115,10 +115,10 @@ public class ServicesImplements implements Services {
 	}
 
 	// select updating information field
-	private static void Selecteditmenu(Person existingPerson) {
+	private static void selectEditMenu(Person existingPerson) {
 		System.out.println(
 				"1: Lastname\n" + "2: Address \n" + "3: State\n" + "4: City\n" + "5: Zipcode\n" + "6: Contact\n");
-		int choice = Utility.isvalidInteger();
+		int choice = Utility.isValidInteger();
 		switch (choice) {
 		case 1:
 			System.out.println("new lastname");
@@ -150,7 +150,7 @@ public class ServicesImplements implements Services {
 	}
 
 	// display all names in sorted form
-	public void SortbyName() {
+	public void sortbyName() {
 		book = Control.readBook(spath);
 		List<Person> displaylist = book;
 		ArrayList<String> sort = new ArrayList<String>();
@@ -172,7 +172,7 @@ public class ServicesImplements implements Services {
 	}
 
 	// display sorted contacts by zip-codes
-	public void SortbyZip() {
+	public void sortbyZip() {
 		book = Control.readBook(spath);
 		List<Person> displaylist = book;
 		ArrayList<String> sort = new ArrayList<String>();
@@ -194,7 +194,7 @@ public class ServicesImplements implements Services {
 	}
 
 	// show all books of persons
-	public void DisplayPerson() {
+	public void displayPerson() {
 		System.out.println("***********Book**************");
 		for (Person person2 : book) {
 			System.out.println(person2.FirstName);
@@ -202,7 +202,7 @@ public class ServicesImplements implements Services {
 	}
 
 	// delete person record from file
-	public void DeletePerson() {
+	public void deletePerson() {
 		System.out.println("enput person fname");
 		String fname = Utility.isString();
 		for (Person person : book) {
@@ -214,7 +214,7 @@ public class ServicesImplements implements Services {
 	}
 
 	// search person details
-	public void SearchPerson() {
+	public void searchPerson() {
 		System.out.println("Reading JSON from a file");
 		System.out.println("----------------------------");
 		System.out.println("enter first name for search");
@@ -230,5 +230,7 @@ public class ServicesImplements implements Services {
 			System.out.println("contact not found!...");
 		}
 	}
+
+
 
 }
